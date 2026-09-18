@@ -1,0 +1,7 @@
+build/
+dist/
+Output/
+PyInstallerBuild/
+*.exe
+*.egg-info/
+__pycache__/
