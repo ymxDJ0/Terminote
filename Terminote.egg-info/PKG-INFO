@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: Terminote
+Version: 0.1.0
+Summary: A terminal note-taking app
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+# Terminote
+A Task management module controlled using CLI commands
