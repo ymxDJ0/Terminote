@@ -1,9 +1,0 @@
-README.md
-pyproject.toml
-Terminote.egg-info/PKG-INFO
-Terminote.egg-info/SOURCES.txt
-Terminote.egg-info/dependency_links.txt
-Terminote.egg-info/entry_points.txt
-Terminote.egg-info/top_level.txt
-terminote_pkg/__init__.py
-terminote_pkg/main.py

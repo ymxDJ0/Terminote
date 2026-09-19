@@ -1,9 +1,10 @@
 import datetime as dt
+import sys
 
 def printHeader():
     print('===========================')
     print('#\t TERMINOTE \t#')
-    print('Date : ',dt.datetime.today().isoformat())
+    print('Date :',dt.datetime.today().isoformat()[:10])
     print('===========================')    
 
 def mainMenu(buffer:int = 0):
@@ -20,18 +21,13 @@ def mainMenu(buffer:int = 0):
         case 3:
             clearNotes()
         case 4:
-            quit()
+            sys.exit()
         case _:
             print('INVALID INPUT')
             if buffer >= 3:
                 print('Too many Invalid Inputs.\nClosing Program...')
-                quit()
+                sys.exit()
             mainMenu(buffer+1)
-    loop = input('[Q] to quit | [ANY] to return to menu')
-    if loop != 'q':
-        mainMenu()
-    else:
-        quit()
 
 def addNote():
     now = dt.datetime.today().isoformat()
@@ -41,16 +37,30 @@ def addNote():
     listNotes()
 
 def listNotes():
+    length = 0
     print('======Tasks=======')
     with open('tasks.txt','r') as f:
-        n = 1
+        n = 0
         for i in f.readlines():
+            n+=1 
             print(f'{n}) {i}')
-            n+=1
+        length = n
+    order = input(f'[1-{length}] to clear a task | [Q] to quit | [A] to add\n')
+    if order.isdecimal():
+        index = int(order)
+        if index <= 0 or index > length:
+            print(f'Task does not exist at index {index}')
+            return
+        removeNote(index)
+    elif order.lower() == 'q':
+        sys.exit()
+    elif order.lower() == 'a':
+        addNote()
 
 def clearNotes():
     with open('tasks.txt','w') as f:
         f.write('')
+    print('All tasks cleared!\n')
 
 def removeNote(lineN: int):
     rf = open('tasks.txt','r')
@@ -62,6 +72,7 @@ def removeNote(lineN: int):
     lineList.pop(lineN-1)
     with open('tasks.txt','w') as wf:
         wf.write(''.join(lineList))
+    print(f'task {lineN} cleared!\n')
 
 def main():
     try: open('tasks.txt','r')
@@ -69,7 +80,8 @@ def main():
         print('initializing files...')
         f= open('tasks.txt','w+')
         f.close()
-    mainMenu()
+    while True:
+        mainMenu()
 
 if __name__ == '__main__':
     main()

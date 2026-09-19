@@ -11,4 +11,4 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-terminote = "terminote_pkg.main:main"
+terminote = "main:main"

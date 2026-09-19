@@ -1,2 +1,0 @@
-[console_scripts]
-terminote = terminote_pkg.main:main
