@@ -7,35 +7,21 @@ OutputDir=Output
 OutputBaseFilename=Terminote-Installer
 Compression=lzma
 SolidCompression=yes
-PrivilegesRequired=admin
+PrivilegesRequired=lowest
+ChangesEnvironment=yes
 
 [Files]
-; Copy your compiled terminote.exe into the destination folder
 Source: "..\PyInstallerBuild\dist\terminote.exe"; DestDir: "{app}"; Flags: ignoreversion
 
+[Registry]
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Check: NeedsAddPath(ExpandConstant('{app}'))
+
 [Code]
-const
-  EnvironmentKey = 'Environment';
-
-procedure ModPath(Path: string);
+function NeedsAddPath(Param: string): boolean;
 var
-  OldPath: string;
+  OrigPath: string;
 begin
-  { Read current user or system path and append your app directory if not already present }
-  if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', OldPath) then
-  begin
-    if Pos(';' + Path + ';', ';' + OldPath + ';') = 0 then
-    begin
-      RegWriteStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', OldPath + ';' + Path);
-    end;
-  end;
-end;
-
-procedure CurStepChanged(CurStep: TSetupStep);
-begin
-  if CurStep = ssPostInstall then
-  begin
-    { Automatically adds the installation folder to the Windows System PATH }
-    ModPath(ExpandConstant('{app}'));
-  end;
+  if not RegQueryStringValue(HKEY_CURRENT_USER, 'Environment', 'Path', OrigPath) then
+    OrigPath := '';
+  Result := Pos(';' + Uppercase(Param) + ';', ';' + Uppercase(OrigPath) + ';') = 0;
 end;
