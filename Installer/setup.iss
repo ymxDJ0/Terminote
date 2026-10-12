@@ -1,6 +1,6 @@
 [Setup]
 AppName=Terminote
-AppVersion=1.0
+AppVersion=1.2
 DefaultDirName={autopf}\Terminote
 DefaultGroupName=Terminote
 OutputDir=Output
