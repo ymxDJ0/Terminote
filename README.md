@@ -18,7 +18,16 @@ A Task management module controlled using CLI commands
 
 
 ## Installation
-Terminote can be installed as either an installer file (in the 'releases' tab of this repo) or by cloning/downloading the repository
+Terminote can be installed either as:
+-an installer file (in the 'releases' tab of this repo).
+-by cloning/downloading the repository and following the setup steps below.
+
+
+### Installer
+1) Download the installer from the "releases" tab
+2) run it and go through the installation
+3) open any teminal and type "terminote"
+
 
 ### Downloaded Repo
 1) Extract the downloaded .zip file into a folder you like
@@ -38,11 +47,6 @@ Terminote can be installed as either an installer file (in the 'releases' tab of
 3) click on the user variable called 'Path' and select 'edit'
 4) press "New" and simply paste the "terminote.exe" path you copied
 5) open any terminal/cmd and type "terminote"
-
-### Installer
-1) Download the installer from the "releases" tab
-2) run it and go through the installation
-3) open any teminal and type "terminote"
 
 
 
